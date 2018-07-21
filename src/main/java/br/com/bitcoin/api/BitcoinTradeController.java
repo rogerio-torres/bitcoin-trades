@@ -26,4 +26,10 @@ public class BitcoinTradeController {
     List<BitcoinTrade> trades = tradeService.findAll();
     return new ResponseEntity<>(trades, HttpStatus.OK);
   }
+
+  @RequestMapping(value = "/api/v1/trades/topsells", method = RequestMethod.GET,
+    produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  public ResponseEntity<?> topSells() throws ServiceException {
+    return new ResponseEntity<>(tradeService.topSells(), HttpStatus.OK);
+  }
 }

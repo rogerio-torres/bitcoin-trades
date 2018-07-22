@@ -10,7 +10,15 @@ public class BitcoinTrade {
   public Long tid;
   public String type;
 
-  public static boolean isSell(BitcoinTrade trade) {
+  public static boolean sell(BitcoinTrade trade) {
     return "sell".equals(trade.type);
+  }
+
+  public static boolean buy(BitcoinTrade trade) {
+    return "buy".equals(trade.type);
+  }
+
+  public static double price(BitcoinTrade trade) {
+    return trade.price;
   }
 }

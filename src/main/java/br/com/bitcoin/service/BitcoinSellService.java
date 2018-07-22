@@ -5,14 +5,12 @@ import br.com.bitcoin.service.exception.ServiceException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class BitcoinTradeService {
+public class BitcoinSellService {
 
   private BitcoinTrade[] fetchTrades() throws ServiceException {
     try {
@@ -22,16 +20,30 @@ public class BitcoinTradeService {
     }
   }
 
-  public List findAll() throws ServiceException {
-    return Arrays.asList(this.fetchTrades());
-  }
-
-  public List topSells() throws ServiceException {
+  public List top() throws ServiceException {
     List<BitcoinTrade> trades = Arrays.asList(this.fetchTrades());
     return trades.stream()
-      .filter(BitcoinTrade::isSell)
-      .sorted((o1, o2) -> o2.price.compareTo(o1.price))
+      .filter(BitcoinTrade::sell)
+      .sorted((trade1, trade2) -> trade2.price.compareTo(trade1.price))
       .limit(5)
       .collect(Collectors.toList());
+  }
+
+  public Double average() throws ServiceException {
+    List<BitcoinTrade> trades = Arrays.asList(this.fetchTrades());
+    return trades.stream()
+      .filter(BitcoinTrade::sell)
+      .mapToDouble(BitcoinTrade::price)
+      .average()
+      .orElse(Double.NaN);
+  }
+
+  public Double median() throws ServiceException {
+    List<BitcoinTrade> trades = Arrays.asList(this.fetchTrades());
+    List<Double> sellValues = trades.stream()
+      .filter(BitcoinTrade::sell)
+      .map(BitcoinTrade::price)
+      .collect(Collectors.toList());
+    return Calculator.calculateMedian(sellValues);
   }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class BitcoinSellService {
+public class BitcoinService {
 
   private BitcoinTrade[] fetchTrades() throws ServiceException {
     try {
@@ -20,30 +20,39 @@ public class BitcoinSellService {
     }
   }
 
-  public List top() throws ServiceException {
+  public List top(String tradeType) throws ServiceException {
     List<BitcoinTrade> trades = Arrays.asList(this.fetchTrades());
     return trades.stream()
-      .filter(BitcoinTrade::sell)
+      .filter(trade -> tradeType.equals(trade.type))
       .sorted((trade1, trade2) -> trade2.price.compareTo(trade1.price))
       .limit(5)
       .collect(Collectors.toList());
   }
 
-  public Double average() throws ServiceException {
+  public Double average(String tradeType) throws ServiceException {
     List<BitcoinTrade> trades = Arrays.asList(this.fetchTrades());
     return trades.stream()
-      .filter(BitcoinTrade::sell)
+      .filter(trade -> tradeType.equals(trade.type))
       .mapToDouble(BitcoinTrade::price)
       .average()
       .orElse(Double.NaN);
   }
 
-  public Double median() throws ServiceException {
+  public Double median(String tradeType) throws ServiceException {
     List<BitcoinTrade> trades = Arrays.asList(this.fetchTrades());
     List<Double> sellValues = trades.stream()
-      .filter(BitcoinTrade::sell)
+      .filter(trade -> tradeType.equals(trade.type))
       .map(BitcoinTrade::price)
       .collect(Collectors.toList());
-    return Calculator.calculateMedian(sellValues);
+    return Calculator.median(sellValues);
+  }
+
+  public Double standardDeviation(String tradeType) throws  ServiceException {
+    List<BitcoinTrade> trades = Arrays.asList(this.fetchTrades());
+    List<Double> sellValues = trades.stream()
+      .filter(trade -> tradeType.equals(trade.type))
+      .map(BitcoinTrade::price)
+      .collect(Collectors.toList());
+    return Calculator.standardDeviation(sellValues);
   }
 }

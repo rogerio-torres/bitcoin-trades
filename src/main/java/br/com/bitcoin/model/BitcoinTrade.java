@@ -4,6 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BitcoinTrade {
+
+  public static String SELL_TYPE = "sell";
+  public static String BUY_TYPE = "buy";
+
   public Long date;
   public Double price;
   public Double amount;

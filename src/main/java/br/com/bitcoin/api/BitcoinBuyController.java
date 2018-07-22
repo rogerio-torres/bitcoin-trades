@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/api/v1/sells")
-public class BitcoinSellController {
+@RequestMapping(value = "/api/v1/buys")
+public class BitcoinBuyController {
 
   @Autowired
   private BitcoinService service;

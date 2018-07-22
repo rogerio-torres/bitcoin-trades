@@ -12,33 +12,32 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/api/v1/sells")
-public class BitcoinSellController {
+@RequestMapping(value = "/api/v1/sales")
+public class BitcoinSalesController {
 
-  @Autowired
-  private BitcoinService service;
+  private BitcoinService service = new BitcoinService(BitcoinTrade.SELL_TYPE);
 
   @RequestMapping(value = "/top", method = RequestMethod.GET,
     produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public ResponseEntity<?> top() throws ServiceException {
-    return new ResponseEntity<>(service.top(BitcoinTrade.SELL_TYPE), HttpStatus.OK);
+  public ResponseEntity<?> top() {
+    return new ResponseEntity<>(service.top(), HttpStatus.OK);
   }
 
   @RequestMapping(value = "/average", method = RequestMethod.GET,
     produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public ResponseEntity<?> average() throws ServiceException {
-    return new ResponseEntity<>(service.average(BitcoinTrade.SELL_TYPE), HttpStatus.OK);
+  public ResponseEntity<?> average() {
+    return new ResponseEntity<>(service.average(), HttpStatus.OK);
   }
 
   @RequestMapping(value = "/median", method = RequestMethod.GET,
     produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public ResponseEntity<?> median() throws ServiceException {
-    return new ResponseEntity<>(service.median(BitcoinTrade.SELL_TYPE), HttpStatus.OK);
+  public ResponseEntity<?> median() {
+    return new ResponseEntity<>(service.median(), HttpStatus.OK);
   }
 
   @RequestMapping(value = "/offset", method = RequestMethod.GET,
     produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-  public ResponseEntity<?> standardDeviation() throws ServiceException {
-    return new ResponseEntity<>(service.standardDeviation(BitcoinTrade.SELL_TYPE), HttpStatus.OK);
+  public ResponseEntity<?> standardDeviation() {
+    return new ResponseEntity<>(service.standardDeviation(), HttpStatus.OK);
   }
 }

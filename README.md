@@ -13,13 +13,13 @@ A java skills test based on Bitcoin variations.
 ## Documentation
 ### Purchases API
 `/api/v1/purchases`
-#### Methods
+#### Get Methods
 1. `/top` find the top 5 purchases.
 2. `/median` find the median value of the purchases price.
 3. `/offset` find the standard deviation of the purchases price.
 ### Sales API
 `/api/v1/sales`
-#### Methods
+#### Get Methods
 1. `/top` find the top 5 sales.
 2. `/median` find the median value of the sales price.
 3. `/offset` find the standard deviation of the sales price.

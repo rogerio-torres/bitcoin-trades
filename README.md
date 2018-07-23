@@ -1,3 +1,5 @@
+[![codebeat badge](https://codebeat.co/badges/d06f1510-bc1b-4cc7-87dd-80d4fdcbdd1e)](https://codebeat.co/projects/github-com-rogerio-torres-bitcoin-trades-master)
+
 # :dollar: bitcoin-trades :dollar:
 A java skills test based on Bitcoin variations.
 ## Requirements

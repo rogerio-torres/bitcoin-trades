@@ -24,3 +24,5 @@ A java skills test based on Bitcoin variations.
 2. `/median` find the median value of the sales price.
 3. `/offset` find the standard deviation of the sales price.
 ### :shipit: That's all folks! :shipit:
+
+Now with actions!
